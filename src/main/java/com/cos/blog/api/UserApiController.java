@@ -19,9 +19,6 @@ public class UserApiController {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired
-	private HttpSession session;
-	
 	@PostMapping("/api/user")
 	public ResponseDto<Integer> save(@RequestBody User user) {
 		System.out.println("api 호출 성공");
@@ -30,14 +27,14 @@ public class UserApiController {
 		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
 	}
 	
-	@PostMapping("/api/user/login")
-	public ResponseDto<Integer> login(@RequestBody User user){
-		System.out.println("login API 호출됨 :::::");
-		User principal = userService.login(user);
-		
-		if(principal != null) {
-			session.setAttribute("principal", principal);
-		}
-		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
-	}
+//	@PostMapping("/api/user/login")
+//	public ResponseDto<Integer> login(@RequestBody User user, HttpSession session){
+//		System.out.println("login API 호출됨 :::::");
+//		User principal = userService.login(user);
+//		
+//		if(principal != null) {
+//			session.setAttribute("principal", principal);
+//		}
+//		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
+//	}
 }
