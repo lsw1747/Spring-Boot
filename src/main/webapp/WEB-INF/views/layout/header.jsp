@@ -28,15 +28,15 @@
 			<c:choose>
 				<c:when test="${empty principal}">
 					<ul class="navbar-nav">
-						<li class="nav-item"><a class="nav-link" href="/loginForm">Login</a></li>
-						<li class="nav-item"><a class="nav-link" href="/signupForm">Sign-up</a></li>
+						<li class="nav-item"><a class="nav-link" href="/auth/loginForm">Login</a></li>
+						<li class="nav-item"><a class="nav-link" href="/auth/signupForm">Sign-up</a></li>
 					</ul>
 				</c:when>
 				<c:otherwise>
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav-link" href="/board/wrtieForm">Posting</a></li>
 						<li class="nav-item"><a class="nav-link" href="/user/userForm">Info</a></li>
-						<li class="nav-item"><a class="nav-link" href="/logoutForm">Logout</a></li>
+						<li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
 					</ul>
 				</c:otherwise>
 			</c:choose>

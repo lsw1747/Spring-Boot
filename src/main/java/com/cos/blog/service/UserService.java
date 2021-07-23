@@ -20,11 +20,6 @@ public class UserService {
 	public void join(User user) {
 		userRepository.save(user);
 	}
-
-	@Transactional(readOnly = true) 
-	public User login(User user) {
-		return userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
-	}
 }
 
 //	@Transactional
