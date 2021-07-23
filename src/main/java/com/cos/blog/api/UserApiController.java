@@ -21,7 +21,7 @@ public class UserApiController {
 	public ResponseDto<Integer> save(@RequestBody User user) {
 		System.out.println("api 호출 성공");
 		user.setRole(RoleType.USER);
-		int result = userService.join(user);
-		return new ResponseDto<Integer>(HttpStatus.OK,result);
+		userService.join(user);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
 	}
 }
