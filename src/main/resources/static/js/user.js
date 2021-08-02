@@ -11,6 +11,7 @@ let index ={
             password : $("#password").val(),
             email : $("#email").val(),
         };
+
         
         $.ajax({
             // 회원가입 수행 요청

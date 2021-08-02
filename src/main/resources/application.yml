@@ -22,8 +22,8 @@ spring:
   jpa:
     open-in-view: true
     hibernate:
-      #ddl-auto: create # create -> update로 바꾸자. create로 해놓으면 재실행할때마다 boom...
-      ddl-auto: update
+      ddl-auto: create # create -> update로 바꾸자. create로 해놓으면 재실행할때마다 boom...
+      #ddl-auto: create
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl # Entity테이블에 있는 변수명 그대로 테이블을 만들어준다.
       use-new-id-generator-mappings: false
