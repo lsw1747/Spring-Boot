@@ -1,5 +1,6 @@
 package com.cos.blog.api;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,17 +12,20 @@ import com.cos.blog.model.RoleType;
 import com.cos.blog.model.User;
 import com.cos.blog.service.UserService;
 
+
 @RestController
-public class UserApiController {
-	
-	@Autowired
-	private UserService userService;
-	
-	@PostMapping("/auth/joinProc")
-	public ResponseDto<Integer> save(@RequestBody User user) {
-		System.out.println("api 호출 성공");
-		user.setRole(RoleType.USER);
-		userService.join(user);
-		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
-	}
+public class UserApiController
+{
+
+    @Autowired
+    private UserService userService;
+
+
+    @PostMapping("/auth/joinProc")
+    public ResponseDto<Integer> save(@RequestBody User user)
+    {
+        user.setRole(RoleType.USER);
+        userService.join(user);
+        return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+    }
 }

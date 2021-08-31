@@ -31,7 +31,7 @@
 <body>
 	<!-- <h3>${principal}</h3> -->
 	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-		<a class="navbar-brand" href="/">Home</a>
+		<a class="navbar-brand" href="/">홈</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#collapsibleNavbar">
 			<span class="navbar-toggler-icon"></span>
@@ -41,18 +41,18 @@
 				<c:when test="${empty principal}">
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav-link"
-							href="/auth/loginForm">Login</a></li>
+							href="/auth/loginForm">로그인</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="/auth/signupForm">Sign-up</a></li>
+							href="/auth/signupForm">회원가입</a></li>
 					</ul>
 				</c:when>
 				<c:otherwise>
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav-link"
-							href="/board/saveForm">Posting</a></li>
+							href="/board/saveForm">글쓰기</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="/user/updateForm">Info</a></li>
-						<li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+							href="/user/updateForm">-</a></li>
+						<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
 					</ul>
 				</c:otherwise>
 			</c:choose>

@@ -1,12 +1,12 @@
 package com.cos.blog.service;
 
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.cos.blog.model.Board;
 import com.cos.blog.model.User;
@@ -21,9 +21,6 @@ public class BoardService
     @Autowired
     private BoardRepository boardRepository;
 
-    @Autowired
-    private BCryptPasswordEncoder encoder;
-
 
     @Transactional
     public void post(Board board, User user)
@@ -31,6 +28,21 @@ public class BoardService
         board.setCount(0);
         board.setUser(user);
         boardRepository.save(board);
+    }
+
+
+    public Board detail(int id)
+    {
+        return boardRepository.findById(id).orElseThrow(() -> {
+            return new IllegalArgumentException("해당 게시글을 조회할 수 없습니다.");
+        });
+    }
+
+
+    @Transactional
+    public void delete(int id)
+    {
+        boardRepository.deleteById(id);
     }
 
 

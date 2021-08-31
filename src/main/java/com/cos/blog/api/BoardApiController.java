@@ -21,10 +21,21 @@ public class BoardApiController
     private BoardService boardService;
 
 
-    @PostMapping("/api/board")
+    @PostMapping(value = "/api/board",
+                 produces = "application/json; charset=utf8")
     public ResponseDto<Integer> save(@RequestBody Board board, @AuthenticationPrincipal PrincipalDetail principal)
     {
         boardService.post(board, principal.getUser());
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
+
+
+    @PostMapping(value = "/api/board/delete",
+                 produces = "application/json; charset=utf8")
+    public ResponseDto<Integer> delete(@RequestBody Board board, @AuthenticationPrincipal PrincipalDetail principal)
+    {
+        boardService.delete(board.getId());
+        return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+    }
+
 }
