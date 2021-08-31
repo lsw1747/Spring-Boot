@@ -44,9 +44,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     @Override
     protected void configure(HttpSecurity http) throws Exception
     {
-        System.out.println("call security config");
         http.csrf().disable() //테스트시에만 csrf 비활성화
-            .authorizeRequests().antMatchers("/", "/auth/**", "/js/**", "/css/**", "/image/**").permitAll() //해당 주소는 전부 권한x
+            .authorizeRequests().antMatchers("/", "/auth/**", "/js/**", "/css/**", "/image/**", "/dummy/**", "/callApi/**").permitAll() //해당 주소는 전부 권한x
             .anyRequest().authenticated().and().formLogin().loginPage("/auth/loginForm") //로그인은 /auth/loginForm 으로
             .loginProcessingUrl("/auth/loginProc")//spring security가 해당 주소로 오는 요청을 가로채서 대신 로그인함.
             .defaultSuccessUrl("/");

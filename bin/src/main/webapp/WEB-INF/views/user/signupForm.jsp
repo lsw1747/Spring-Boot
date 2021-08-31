@@ -1,4 +1,5 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+	language="java"%>
 
 <%@ include file="../layout/header.jsp"%>
 
@@ -19,7 +20,7 @@
 		<button id="btn-save" class="btn btn-primary">Sign Up</button>
 	</form>
 </div>
-<script src="/js/user.js?ver=3"></script>
+<script src="/js/user.js"></script>
 <br />
 
 <%@ include file="../layout/footer.jsp"%>
