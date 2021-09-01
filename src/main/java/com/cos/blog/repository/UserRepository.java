@@ -12,6 +12,7 @@ import com.cos.blog.model.User;
 public interface UserRepository extends JpaRepository<User, Integer>
 {
     Optional<User> findByUsername(String Username);
+    Optional<User> findById(int id);
     List<User> findAll();
 }
 

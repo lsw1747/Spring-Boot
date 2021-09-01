@@ -45,7 +45,6 @@ public class UserService
 
     public User findById(String username)
     {
-
         // UserRepository.java에서 findByUsername의 값을 Optional<User> 에 담았기 때문에 이것을 부를때는 orElse와 같이 예외처리를 해주어야 한다. 
         // 1. orElse() 메소드 : 저장된 값이 존재하면 그 값을 반환하고, 값이 존재하지 않으면 인수로 전달된 값을 반환함. 
         // 2. orElseGet() 메소드 : 저장된 값이 존재하면 그 값을 반환하고, 값이 존재하지 않으면 인수로 전달된 람다 표현식의 결괏값을 반환함. 
@@ -56,16 +55,17 @@ public class UserService
         });
     }
 
-}
 
-//	@Transactional
-//	public int join(User user) {
-//		try{
-//			userRepository.save(user);
-//			return 1;
-//		}catch (Exception e) {
-//			e.printStackTrace();
-//			System.out.println("UserService : join"+e.getMessage());
-//			return -1;
-//		}
-//	}
+    @Transactional
+    public void update(User user)
+    {
+        User persistance = userRepository.findById(user.getId()).orElseThrow(() -> {
+            return new IllegalArgumentException("사용자를 찾을 수 없습니다. : " + user.getId());
+        });
+        String rawPassword = user.getPassword();
+        String encPassword = encoder.encode(rawPassword);
+        persistance.setPassword(encPassword);
+        persistance.setEmail(user.getEmail());
+    }
+
+}
