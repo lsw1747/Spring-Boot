@@ -34,6 +34,7 @@ let index = {
 		$.ajax({
 			// 회원가입 수행 요청
 			type: "POST",
+			async: false,
 			url: "/auth/joinProc",
 			data: JSON.stringify(data), //http body 데이터
 			contentType: "application/json; charset=utf-8", //body 데이터가 어떤 타입인지
@@ -41,7 +42,7 @@ let index = {
 		}).done(response => {
 			// 성공시
 			console.log(response);
-			alert('회원가입이 완료되었습니다.');
+			alert('회원가입이 완료되었습니다1.');
 			location.href = "/";
 		}).fail(err => {
 			// 실패시
@@ -58,20 +59,15 @@ let index = {
 
 		$.ajax({
 			type: "PUT",
+			async: false,
 			url: "/auth/update",
 			data: JSON.stringify(data),
 			contentType: "application/json; charset=UTF-8",
-			dataType: "json",
-			beforeSend:function(){
-				alert("ajax 실행");
-			},
-			success:function(res){
-				alert("회원 정보 수정이 완료되었습니다. "+res);
-				location.href="/logout";
-			},
-			error : function(err){
-				alert(JSON.stringify(err));
-			}
+			dataType: "json"
+		}).done(res => {
+			alert("회원 정보 수정이 완료되었습니다. ");
+		}).fail(err => {
+			alert(JSON.stringify(err));
 		});
 	}
 }
