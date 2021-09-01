@@ -1,12 +1,13 @@
 package com.cos.blog.service;
 
 
-import javax.transaction.Transactional;
+// import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cos.blog.model.Board;
 import com.cos.blog.model.User;
@@ -31,6 +32,7 @@ public class BoardService
     }
 
 
+    @Transactional(readOnly = true)
     public Board detail(int id)
     {
         return boardRepository.findById(id).orElseThrow(() -> {
@@ -46,8 +48,21 @@ public class BoardService
     }
 
 
+    @Transactional(readOnly = true)
     public Page<Board> getPostList(Pageable pageable)
     {
         return boardRepository.findAll(pageable);
+    }
+
+
+    @Transactional
+    public void update(int id, Board requestBoard)
+    {
+        Board board = boardRepository.findById(id).orElseThrow(() -> {
+            return new IllegalArgumentException("해당 게시글을 조회할 수 없습니다.");
+        });
+
+        board.setTitle(requestBoard.getTitle());
+        board.setContent(requestBoard.getContent());
     }
 }
