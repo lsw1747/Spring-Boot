@@ -14,6 +14,7 @@ let index = {
 			}
 		});
 		$('#btn-update').on("click", () => {
+			_username = $("#username").val();
 			_password = $("#password").val();
 			_email = $("#email").val();
 			if (_username != "" && _password != "" && _email != "") {
@@ -53,6 +54,7 @@ let index = {
 
 		let data = {
 			id: $('#id').val(),
+			username: _username,
 			password: _password,
 			email: _email
 		};
