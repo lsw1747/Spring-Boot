@@ -1,16 +1,20 @@
 package com.cos.blog.controller;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-/*
- * 인증이 안된 사용자는 /auth**로 접속하도록 허용 일반 / 주소일땐 index.jsp로 허용 static 이하에 있는 폴더 허용
- */
+
+import com.cos.blog.service.UserService;
 
 
 @Controller
 public class UserController
 {
+
+    @Autowired
+    private UserService userService;
+
 
     @GetMapping("/auth/signupForm")
     public String signupForm()
@@ -31,4 +35,13 @@ public class UserController
     {
         return "user/userInfo";
     }
+
+
+    @GetMapping("/auth/kakao/callBack")
+    public String callKakaoApi(String code)
+    {
+        userService.kakaoCallBack(code);
+        return "redirect:/";
+    }
+
 }

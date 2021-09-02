@@ -1,8 +1,15 @@
 package com.cos.blog.model;
 
+
 import java.sql.Timestamp;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -11,33 +18,42 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
 //@DynamicInsert //insert 할때 null인 값은 쿼리문에 실행되지 않게 해줌.
-public class User {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	
-	@Column(nullable = false, length = 30, unique=true)
-	private String username;
-	
-	@Column(nullable = false, length = 100) //비밀번호는 암호화 된 데이터를 넣어야하기 때문에 length를 넉넉히 잡는다
-	private String password;
-	
-	@Column(nullable = false, length = 50, unique=true)
-	private String email;
-	
+public class User
+{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(nullable = false,
+            length = 100,
+            unique = true)
+    private String username;
+
+    @Column(nullable = false,
+            length = 100) //비밀번호는 암호화 된 데이터를 넣어야하기 때문에 length를 넉넉히 잡는다
+    private String password;
+
+    @Column(nullable = false,
+            length = 50,
+            unique = true)
+    private String email;
+
 //	@ColumnDefault("user")
-	//DB는 RoleType이라는게 없다
-	@Enumerated(EnumType.STRING)
-	private RoleType role; // String < Enum ( admin, user, manager 등 열거형이기 때문에 ) 여기선 그냥 String으로  
-	
-	@CreationTimestamp // 시간이 자동으로 입력이 됨
-	private Timestamp createDate;
+    //DB는 RoleType이라는게 없다
+    @Enumerated(EnumType.STRING)
+    private RoleType role; // String < Enum ( admin, user, manager 등 열거형이기 때문에 ) 여기선 그냥 String으로  
+
+    private String oauth;
+
+    @CreationTimestamp // 시간이 자동으로 입력이 됨
+    private Timestamp createDate;
 
 }

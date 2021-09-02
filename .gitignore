@@ -13,6 +13,9 @@ target/
 .springBeans
 .sts4-cache
 
+### KEY_PROPERTIES ###
+key.properties
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
