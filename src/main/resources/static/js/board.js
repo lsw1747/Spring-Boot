@@ -1,3 +1,5 @@
+let ajax_content_type = "application/json; charset=utf-8";
+
 let index = {
 	init: function() {
 		$('#btn-save').on("click", () => {
@@ -8,6 +10,9 @@ let index = {
 		});
 		$('#btn-delete').on("click", () => {
 			this.delete();
+		});
+		$('#btn-reply').on("click", () => {
+			this.reply();
 		});
 	},
 
@@ -22,7 +27,7 @@ let index = {
 			type: "POST",
 			url: "/api/board",
 			data: JSON.stringify(data),
-			contentType: "application/json; charset=utf-8",
+			contentType: ajax_content_type,
 			dataType: "json"
 		}).done(response => {
 			alert('글쓰기가 완료되었습니다.');
@@ -45,7 +50,7 @@ let index = {
 			type: "PUT",
 			url: "/api/board/update/"+id,
 			data: JSON.stringify(data),
-			contentType: "application/json; charset=utf-8",
+			contentType: ajax_content_type,
 			dataType: "json"
 		}).done(response => {
 			alert('글 수정이 완료되었습니다..');
@@ -71,6 +76,25 @@ let index = {
 			});
 
 		}
+	},
+	reply: ()=>{
+		let id = $("#id").text(); //게시글 번호
+		let data = {
+			content :  $("#reply--content").val(),
+			userId : $("#userid").val()
+		}
+		$.ajax({
+			type: "POST",
+			url: "/api/reply/"+id,
+			data: JSON.stringify(data),
+			contentType: ajax_content_type,
+			dataType: "json"
+		}).done(res=>{
+			console.log(res);
+			location.href="/board/"+id;
+		}).fail(err=>{
+			alert("에러 내용 : "+JSON.stringify(err))
+		})
 	}
 }
 

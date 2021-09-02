@@ -46,4 +46,4 @@
 		</ul>
 		<br />
 
-		<%@ include file="layout/footer.jsp" %>
+<%@ include file="layout/footer.jsp" %>

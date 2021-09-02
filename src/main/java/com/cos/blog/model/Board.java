@@ -17,6 +17,8 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -54,6 +56,7 @@ public class Board
     @OneToMany(mappedBy = "board",
                fetch = FetchType.EAGER) // mappedBy : 연관관계의 주인이 아니다(난 FK가 아니에요~ DB에 column을 만들지 마세요) 라는 의미
     //@JoinColumn(name="replyId") 필요없음, 만들어지면안됨
+    @JsonIgnoreProperties({"board"})
     private List<Reply> reply; //하나의 게시글에 여러개의 댓글이 달려있을 수 있음.
 
     @CreationTimestamp
