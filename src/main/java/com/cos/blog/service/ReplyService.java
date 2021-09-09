@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cos.blog.model.Board;
 import com.cos.blog.model.Reply;
@@ -19,6 +20,7 @@ public class ReplyService
     ReplyRepository replyRepository;
 
 
+    @Transactional
     public void save(Reply reply, int boardId, User user)
     {
         Board board = new Board();
@@ -30,6 +32,7 @@ public class ReplyService
     }
 
 
+    @Transactional(readOnly = true)
     public List<Reply> findAll()
     {
         return replyRepository.findAll();

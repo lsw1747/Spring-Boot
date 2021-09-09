@@ -7,7 +7,6 @@
 	}
 </style>
 <div class="container">
-</div>
 <c:choose>
 	<c:when test="${empty principal.user.oauth}">
 		<form>
@@ -32,6 +31,7 @@
 		<p>잘못된 접근입니다.</p>
 	</c:otherwise>
 </c:choose>
+</div>
 <script src="/js/user.js"></script>
 <br />
 

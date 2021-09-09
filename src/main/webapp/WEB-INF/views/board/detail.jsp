@@ -56,33 +56,25 @@
 		<div class = "card left">
 			<div class = "card-hearder">댓글 리스트</div>
 			<ul id="reply--box" class = "list-group" style="overflow:auto; height:300px;">
-				<c:set var="reply" items="{board.reply}">
-					<li id="reply--1" class ="list-group-item d-flex justify-content-between">
-						<div></div>
-						<div class ="d-flex">
-							<div class="font-italic">작성자 :  &nbsp;</div>
-							<button class ="btn btn-primary badge">삭제</button>
-						</div>
-					</li>
-				</c:set>
-				<%--
+		
 				<c:forEach var="reply" items="${board.reply}" varStatus="status">
+				<input type="hidden" id="replyid" value="${reply.id}"/>
 					<li id="reply--1" class ="list-group-item d-flex justify-content-between">
-						<div>${reply.id} : ${status.count} : ${reply.content}</div>
+						<div>${reply.content}</div>
 						<div class ="d-flex">
-							<div class="font-italic">작성자 : ${reply.user.username} &nbsp;</div>
-							<button class ="btn btn-primary badge">삭제</button>
+							<div class="font-italic">작성자 : ${reply.user.username.substring(0,3)}**** &nbsp;</div>
+							<%-- <button id = "btn-delete-reply-${status.index}" class ="btn btn-primary badge">삭제</button>--%>
+							<button id = "btn-delete-reply" class ="btn btn-primary badge">삭제</button>
 						</div>
 					</li>
 				</c:forEach>
-				--%>
 			</ul>
 		</div>
 		<div class ="card right">
 			<input type="hidden" id="userid" value ="${principal.user.id}"/>
 			<div class = "card-header">댓글</div>
 			<div class = "card-body"><textarea id = "reply--content" class = "form-control" rows = "5"></textarea></div>
-			<div class = "card-footer"><button id = "btn-reply" class = "btn btn-primary">등록</button></div>
+			<div class = "card-footer"><button id = "btn-reply" type="button" class = "btn btn-primary">등록</button></div>
 		</div>
 	</div>
 </div>

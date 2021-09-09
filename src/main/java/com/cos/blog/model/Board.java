@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -57,6 +58,7 @@ public class Board
                fetch = FetchType.EAGER) // mappedBy : 연관관계의 주인이 아니다(난 FK가 아니에요~ DB에 column을 만들지 마세요) 라는 의미
     //@JoinColumn(name="replyId") 필요없음, 만들어지면안됨
     @JsonIgnoreProperties({"board"})
+    @OrderBy("id desc")
     private List<Reply> reply; //하나의 게시글에 여러개의 댓글이 달려있을 수 있음.
 
     @CreationTimestamp

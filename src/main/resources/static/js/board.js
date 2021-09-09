@@ -1,5 +1,4 @@
 let ajax_content_type = "application/json; charset=utf-8";
-
 let index = {
 	init: function() {
 		$('#btn-save').on("click", () => {
@@ -13,6 +12,9 @@ let index = {
 		});
 		$('#btn-reply').on("click", () => {
 			this.reply();
+		});
+		$('#btn-delete-reply').on("click", () => {
+			this.delete_reply();
 		});
 	},
 
@@ -38,9 +40,9 @@ let index = {
 		});
 	},
 	update: function() {
-		
+
 		let id = $("#id").val();
-		
+
 		let data = {
 			title: $("#title").val(),
 			content: $("#content").val()
@@ -48,14 +50,14 @@ let index = {
 
 		$.ajax({
 			type: "PUT",
-			url: "/api/board/update/"+id,
+			url: "/api/board/update/" + id,
 			data: JSON.stringify(data),
 			contentType: ajax_content_type,
 			dataType: "json"
 		}).done(response => {
 			alert('글 수정이 완료되었습니다..');
 			console.log(response);
-			location.href = "/board/"+id;
+			location.href = "/board/" + id;
 		}).fail(err => {
 			alert(JSON.stringify(err));
 		});
@@ -66,8 +68,8 @@ let index = {
 		if (result) {
 			$.ajax({
 				type: "DELETE",
-				url: "/api/board/delete/"+id,
-				dataType:"json"
+				url: "/api/board/delete/" + id,
+				dataType: "json"
 			}).done(res => {
 				alert('삭제가 완료되었습니다.');
 				location.href = "/";
@@ -77,24 +79,37 @@ let index = {
 
 		}
 	},
-	reply: ()=>{
+	reply: () => {
 		let id = $("#id").text(); //게시글 번호
 		let data = {
-			content :  $("#reply--content").val(),
-			userId : $("#userid").val()
+			content: $("#reply--content").val(),
+			//userId: $("#userid").val()
 		}
-		$.ajax({
-			type: "POST",
-			url: "/api/reply/"+id,
-			data: JSON.stringify(data),
-			contentType: ajax_content_type,
-			dataType: "json"
-		}).done(res=>{
-			console.log(res);
-			location.href="/board/"+id;
-		}).fail(err=>{
-			alert("에러 내용 : "+JSON.stringify(err))
-		})
+		if (data.content != "") {
+			//if (data.content != "" && data.userId != "") {
+			$.ajax({
+				type: "POST",
+				url: "/api/reply/" + id,
+				data: JSON.stringify(data),
+				contentType: ajax_content_type,
+				dataType: "json"
+			}).done(res => {
+				console.log(res);
+				alert('댓글 작성이 완료되었습니다.');
+				location.href = "/board/" + id;
+			}).fail(err => {
+				alert("에러 내용 : " + JSON.stringify(err))
+			})
+		} else {
+			alert('댓글 내용을 입력하세요.');
+		}
+	},
+	delete_reply : () =>{
+		//reply id로 댓글 삭제
+		let data = {
+			replyId: $("#replyid").val()
+		}
+		alert(data.replyId);
 	}
 }
 
