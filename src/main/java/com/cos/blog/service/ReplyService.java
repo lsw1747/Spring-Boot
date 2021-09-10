@@ -37,4 +37,11 @@ public class ReplyService
     {
         return replyRepository.findAll();
     }
+
+
+    @Transactional
+    public void delete(int replyId)
+    {
+        replyRepository.deleteById(replyId);
+    }
 }

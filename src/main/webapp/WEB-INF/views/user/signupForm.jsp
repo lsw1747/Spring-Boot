@@ -16,7 +16,7 @@
 			<label for="email">이메일</label> <input type="email"
 				class="form-control" placeholder="ex) abc@naver.com" id="email">
 		</div>
-		<button id="btn-save" class="btn btn-primary">회원가입</button>
+		<button id="btn-save" type="button" class="btn btn-primary">회원가입</button>
 	</form>
 </div>
 <script src="/js/user.js"></script>

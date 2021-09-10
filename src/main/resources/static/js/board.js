@@ -13,9 +13,6 @@ let index = {
 		$('#btn-reply').on("click", () => {
 			this.reply();
 		});
-		$('#btn-delete-reply').on("click", () => {
-			this.delete_reply();
-		});
 	},
 
 	save: function() {
@@ -63,7 +60,7 @@ let index = {
 		});
 	},
 	delete: function() {
-		let result = confirm("한번 삭제하면 되돌릴 수 없습니다. 정말로 삭제할까요?");
+		let result = confirm("게시글에 작성된 댓글이 전부 삭제되고, 한번 삭제하면 되돌릴 수 없습니다. 정말로 삭제할까요?");
 		let id = $("#id").text();
 		if (result) {
 			$.ajax({
@@ -104,13 +101,30 @@ let index = {
 			alert('댓글 내용을 입력하세요.');
 		}
 	},
-	delete_reply : () =>{
-		//reply id로 댓글 삭제
-		let data = {
-			replyId: $("#replyid").val()
+	replyDelete: (boardId, _replyId) => {
+		let result = confirm("댓글을 정말 삭제할까요?");
+		if (result) {
+			let data = {
+				replyId: _replyId
+			}
+			if (replyId != "") {
+				$.ajax({
+					type: "DELETE",
+					url: "/api/reply?replyId=" + data.replyId,
+					data: JSON.stringify(data),
+					contentType: ajax_content_type,
+					dataType: "json"
+				}).done(res => {
+					alert('댓글 삭제가 완료되었습니다.');
+					location.href = "/board/" + boardId;
+				}).fail(err => {
+					alert("에러 내용 : " + JSON.stringify(err))
+				})
+			} else {
+				alert('존재하지 않는 댓글입니다.');
+			}
 		}
-		alert(data.replyId);
-	}
+	},
 }
 
 index.init();

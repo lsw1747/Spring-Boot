@@ -40,11 +40,15 @@ let index = {
 			data: JSON.stringify(data), //http body 데이터
 			contentType: "application/json; charset=utf-8", //body 데이터가 어떤 타입인지
 			dataType: "json" // 응답이 json 형태로 오면 -> javascript
-		}).done(response => {
+		}).done(res => {
 			// 성공시
-			console.log(response);
-			alert('회원가입이 완료되었습니다.');
-			location.href = "/";
+			if(res.status === 500) {
+				alert('회원가입에 실패하였습니다. 이메일 혹은 아이디가 중복되었습니다.');
+			} else {
+				console.log(response);
+				alert('회원가입이 완료되었습니다.');
+				location.href = "/";
+			}
 		}).fail(err => {
 			// 실패시
 			alert(JSON.stringify(err));

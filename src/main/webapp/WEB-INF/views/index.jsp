@@ -9,20 +9,34 @@
 		margin-left: 215;
 		margin-bottom : 20;
 	}
+	tr.top {
+		background-color: #343a40;
+		color: aliceblue;
+	}
 </style>
 	<%@ include file="layout/header.jsp" %>
 		<div>
 			<h1 class ="title">Blog</h1>
 		</div>
 		<div class="container">
-			<c:forEach var="board" items="${boards.content}">
-				<div class="card m-2">
-					<div class="card-body">
-						<a href="/board/${board.id}"><p class="color">${board.title}</p></a>
-					</div>
-				</div>
-			</c:forEach>
-
+		  <table class="table">
+		    <thead>
+		      <tr class="top">
+		        <th>게시글</th>
+		        <th>조회수</th>
+		        <th>작성자</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		    <c:forEach var="board" items="${boards.content}">
+		      <tr>
+		        <td><a href="/board/${board.id}"><p class="color">${board.title}</p></a></td>
+		        <td>${board.count}</td>
+		        <td>${board.user.username.substring(0,3)}***</td>
+		      </tr>
+		      </c:forEach>
+		    </tbody>
+		  </table>
 		</div>
 		<ul class="pagination justify-content-center">
 			<c:choose>

@@ -42,6 +42,7 @@ public class BoardController
     public String showBoardDetail(@PathVariable(value = "id") int id, Model model) throws Exception
     {
         model.addAttribute("board", boardService.detail(id));
+        model.addAttribute("count", boardService.updateCount(id)); //조회수 추가
         return "board/detail";
     }
 

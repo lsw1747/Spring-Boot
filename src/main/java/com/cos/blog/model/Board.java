@@ -4,6 +4,7 @@ package com.cos.blog.model;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -55,11 +56,13 @@ public class Board
     private User user;
 
     @OneToMany(mappedBy = "board",
-               fetch = FetchType.EAGER) // mappedBy : 연관관계의 주인이 아니다(난 FK가 아니에요~ DB에 column을 만들지 마세요) 라는 의미
-    //@JoinColumn(name="replyId") 필요없음, 만들어지면안됨
+               fetch = FetchType.EAGER,
+               cascade = CascadeType.REMOVE) // mappedBy : 연관관계의 주인이 아니다(난 FK가 아니에요~ DB에 column을 만들지 마세요) 라는 의미
+    // Reply 테이블에는 board, user정보가 같이 있기 때문에 board -> reply -> board -> reply ...의 과정이 반복될 수 있다.
+    // 무한 참조 방지를 위해, board가 호출될 때는, 해당 어노테이션이 가리키는 테이블을 호출하지 않도록 함.
     @JsonIgnoreProperties({"board"})
     @OrderBy("id desc")
-    private List<Reply> reply; //하나의 게시글에 여러개의 댓글이 달려있을 수 있음.
+    private List<Reply> reply; //하나의 게시글에 여러개의 댓글이 달려있을 수 있음. one-to-many / One : Many = Board : Reply
 
     @CreationTimestamp
     private Timestamp createDate;

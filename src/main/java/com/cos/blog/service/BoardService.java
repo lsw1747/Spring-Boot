@@ -65,4 +65,11 @@ public class BoardService
         board.setTitle(requestBoard.getTitle());
         board.setContent(requestBoard.getContent());
     }
+
+
+    @Transactional
+    public int updateCount(int id)
+    {
+        return boardRepository.updateCount(id);
+    }
 }
